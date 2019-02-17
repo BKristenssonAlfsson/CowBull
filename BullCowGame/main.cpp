@@ -3,17 +3,32 @@
 
 using namespace std;
 
+string Guess = "";
+constexpr int WORD_LENGTH = 6;
+
+void Intro();
+string GetGuess();
+
 int main() {
 	
-	string Guess = "";
-	constexpr int WORD_LENGTH = 6;
+	Intro();
 
-	cout << "Welcome to Bulls and Cows" << endl;
-	cout << "Guess the isogram that has " << WORD_LENGTH << " letters in it!" << endl;
+	GetGuess();
 
-	cout << "Please, enter your guess: ";
-	getline(cin, Guess);
 	cout << "You guessed on the word " << Guess << endl;
 
 	return 0;
+}
+
+void Intro() {
+	cout << "Welcome to Bulls and Cows" << endl;
+	cout << "Guess the isogram that has " << WORD_LENGTH << " letters in it!" << endl;
+
+	return;
+}
+
+string GetGuess() {
+	cout << "Please, enter your guess: ";
+	getline(cin, Guess);
+	return Guess;
 }
