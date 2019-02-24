@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "iostream"
 
 using int32 = int;
 
@@ -32,10 +33,23 @@ bool Game::CheckGuessValidity(FString)
 	return false;
 }
 
-BullCowCount Game::SubmitGuess(FString)
+FBullCowCount Game::SubmitGuess(FString Guess)
 {
 	MyCurrentTry++;
-	BullCowCount BullCowCount;
-	
+	FBullCowCount BullCowCount;
+	int32 HiddenWordLength = MyHiddenWord.length();
+
+	for (int32 i = 0; i < HiddenWordLength; i++) {
+		for (int32 j = 0; j < HiddenWordLength; j++) {
+			if (Guess[j] == MyHiddenWord[i]) {
+				if (i == j) {
+					BullCowCount.Bulls++;
+				}
+				else {
+					BullCowCount.Cows++;
+				}
+			}
+		}			
+	}
 	return BullCowCount;
 }
