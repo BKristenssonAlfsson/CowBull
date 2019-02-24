@@ -22,9 +22,8 @@ int main() {
 }
 
 void Intro() {
-	constexpr int32 WORD_LENGTH = 6;
 	std::cout << "Welcome to Bulls and Cows" << std::endl;
-	std::cout << "Guess the isogram that has " << WORD_LENGTH << " letters in it!" << std::endl;
+	std::cout << "Guess the isogram that has " << BCGame.GetHiddenWordLength() << " letters in it!" << std::endl;
 	std::cout << std::endl;
 	return;
 }

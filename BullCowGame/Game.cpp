@@ -12,12 +12,17 @@ int32 Game::GetMaxTries() const { return MyMaxTries; }
 
 int32 Game::GetCurrentTry() const { return MyCurrentTry; }
 
+int32 Game::GetHiddenWordLength() const
+{
+	return MyHiddenWord.length();
+}
+
 void Game::Reset()
 {
 	constexpr int32 MAX_TRIES = 5;
 	MyMaxTries = MAX_TRIES;
 
-	const FString HIDDEN_WORD = "planet";
+	const FString HIDDEN_WORD = "alpine";
 	MyHiddenWord = HIDDEN_WORD;
 
 	MyCurrentTry = 1;
@@ -28,7 +33,7 @@ bool Game::IsGameWon() const
 	return false;
 }
 
-bool Game::CheckGuessValidity(FString)
+bool Game::CheckGuessValidity(FString) const
 {
 	return false;
 }
