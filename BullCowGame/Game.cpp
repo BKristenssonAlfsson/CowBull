@@ -1,26 +1,25 @@
 #include "Game.h"
 
+using int32 = int;
+
 Game::Game()
 {
 	Reset();
 }
 
-int Game::GetMaxTries() const { return MyMaxTries; }
+int32 Game::GetMaxTries() const { return MyMaxTries; }
 
-int Game::GetCurrentTry() const { return MyCurrentTry; }
+int32 Game::GetCurrentTry() const { return MyCurrentTry; }
 
 void Game::Reset()
 {
+	constexpr int32 MAX_TRIES = 5;
+	MyMaxTries = MAX_TRIES;
+
+	const FString HIDDEN_WORD = "planet";
+	MyHiddenWord = HIDDEN_WORD;
+
 	MyCurrentTry = 1;
-	MyMaxTries = 8;
-}
-
-void Game::Intro()
-{
-}
-
-void Game::PlayGame()
-{
 }
 
 bool Game::IsGameWon() const
@@ -28,17 +27,15 @@ bool Game::IsGameWon() const
 	return false;
 }
 
-bool Game::CheckGuessValidity(std::string)
+bool Game::CheckGuessValidity(FString)
 {
 	return false;
 }
 
-bool Game::AskToPlayAgain()
+BullCowCount Game::SubmitGuess(FString)
 {
-	return false;
-}
-
-std::string Game::GetGuess()
-{
-	return std::string();
+	MyCurrentTry++;
+	BullCowCount BullCowCount;
+	
+	return BullCowCount;
 }
