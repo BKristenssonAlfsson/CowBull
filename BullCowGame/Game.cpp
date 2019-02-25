@@ -33,9 +33,20 @@ bool Game::IsGameWon() const
 	return false;
 }
 
-bool Game::CheckGuessValidity(FString) const
+EWordStatus Game::CheckGuessValidity(FString Guess) const
 {
-	return false;
+	if (false) {
+		return EWordStatus::Not_Isogram;
+	} 
+	else if (false) {
+		return EWordStatus::Not_Lowercase;
+	}
+	else if (Guess.length() != GetHiddenWordLength()) {
+		return EWordStatus::Word_To_Short;
+	}
+	else {
+		return EWordStatus::OK;
+	}
 }
 
 FBullCowCount Game::SubmitGuess(FString Guess)
