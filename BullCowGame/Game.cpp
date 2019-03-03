@@ -23,7 +23,6 @@ void Game::Reset()
 
 	const FString HIDDEN_WORD = "alpine";
 	MyHiddenWord = HIDDEN_WORD;
-	bGameIsWon = false;
 
 	MyCurrentTry = 1;
 }
