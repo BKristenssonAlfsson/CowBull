@@ -53,7 +53,8 @@ FText GetGuess() {
 
 		int32 CurrentGuess = BCGame.GetCurrentTry();
 		
-		std::cout << "Try " << CurrentGuess << ". Please, enter your guess: ";
+		std::cout << "Try " << CurrentGuess << " of " << BCGame.GetMaxTries();
+		std::cout << ". Please, enter your guess: ";
 		std::getline(std::cin, Guess);
 
 		Status = BCGame.CheckGuessValidity(Guess);
@@ -61,18 +62,17 @@ FText GetGuess() {
 		switch (Status)
 		{
 		case EWordStatus::Word_To_Short:
-			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word\n";
+			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word\n\n";
 			break;
 		case EWordStatus::Not_Lowercase:
-			std::cout << "Please write your word with lowercase. \n";
+			std::cout << "Please write your word with lowercase. \n\n";
 			break;
 		case EWordStatus::Not_Isogram:
-			std::cout << "Your word " << Guess << " is not an isogram. (No repeating letters) \n";
+			std::cout << "Your word " << Guess << " is not an isogram. (No repeating letters) \n\n";
 			break;
 		default:
 			break;
 		}
-		std::cout << std::endl;
 	} while (Status != EWordStatus::OK);
 	return Guess;
 }
