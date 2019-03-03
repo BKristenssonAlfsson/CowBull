@@ -10,6 +10,7 @@ struct FBullCowCount {
 };
 
 enum class EWordStatus {
+	Invalid,
 	OK,
 	Not_Isogram,
 	Word_To_Short,
@@ -33,4 +34,5 @@ private:
 	int32 MyCurrentTry;
 	int32 MyMaxTries;
 	FString MyHiddenWord;
+	bool bGameIsWon;
 };

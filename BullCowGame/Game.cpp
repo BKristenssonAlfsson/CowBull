@@ -12,10 +12,9 @@ int32 Game::GetMaxTries() const { return MyMaxTries; }
 
 int32 Game::GetCurrentTry() const { return MyCurrentTry; }
 
-int32 Game::GetHiddenWordLength() const
-{
-	return MyHiddenWord.length();
-}
+int32 Game::GetHiddenWordLength() const { return MyHiddenWord.length();  }
+
+bool Game::IsGameWon() const { return bGameIsWon; }
 
 void Game::Reset()
 {
@@ -24,13 +23,9 @@ void Game::Reset()
 
 	const FString HIDDEN_WORD = "alpine";
 	MyHiddenWord = HIDDEN_WORD;
+	bGameIsWon = false;
 
 	MyCurrentTry = 1;
-}
-
-bool Game::IsGameWon() const
-{
-	return false;
 }
 
 EWordStatus Game::CheckGuessValidity(FString Guess) const
@@ -51,12 +46,13 @@ EWordStatus Game::CheckGuessValidity(FString Guess) const
 
 FBullCowCount Game::SubmitGuess(FString Guess)
 {
+	bGameIsWon = false;
 	MyCurrentTry++;
 	FBullCowCount BullCowCount;
-	int32 HiddenWordLength = MyHiddenWord.length();
+	int32 WordLength = MyHiddenWord.length();
 
-	for (int32 i = 0; i < HiddenWordLength; i++) {
-		for (int32 j = 0; j < HiddenWordLength; j++) {
+	for (int32 i = 0; i < WordLength; i++) {
+		for (int32 j = 0; j < WordLength; j++) {
 			if (Guess[j] == MyHiddenWord[i]) {
 				if (i == j) {
 					BullCowCount.Bulls++;
@@ -66,6 +62,12 @@ FBullCowCount Game::SubmitGuess(FString Guess)
 				}
 			}
 		}			
+	}
+	if (BullCowCount.Bulls == WordLength) {
+		bGameIsWon = true;
+	}
+	else {
+		bGameIsWon = false;
 	}
 	return BullCowCount;
 }
