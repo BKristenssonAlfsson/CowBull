@@ -10,7 +10,10 @@ Game::Game()
 	Reset();
 }
 
-int32 Game::GetMaxTries() const { return MyMaxTries; }
+int32 Game::GetMaxTries() const { 
+	TMap<int32, int32> WordLengthToMaxTries{ {3, 5}, {4, 8}, {5, 12}, {6, 18} };
+	return WordLengthToMaxTries[MyHiddenWord.length()];
+}
 
 int32 Game::GetCurrentTry() const { return MyCurrentTry; }
 
@@ -20,9 +23,6 @@ bool Game::IsGameWon() const { return bGameIsWon; }
 
 void Game::Reset()
 {
-	constexpr int32 MAX_TRIES = 5;
-	MyMaxTries = MAX_TRIES;
-
 	const FString HIDDEN_WORD = "alpine";
 	MyHiddenWord = HIDDEN_WORD;
 
