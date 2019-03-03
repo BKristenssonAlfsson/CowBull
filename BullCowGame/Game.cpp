@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "iostream"
+#include <map>
+#define TMap std::map
 
 using int32 = int;
 
@@ -29,10 +31,10 @@ void Game::Reset()
 
 EWordStatus Game::CheckGuessValidity(FString Guess) const
 {
-	if (false) {
+	if (!IsIsogram(Guess)) {
 		return EWordStatus::Not_Isogram;
 	} 
-	else if (false) {
+	else if (!IsLowerCase(Guess)) {
 		return EWordStatus::Not_Lowercase;
 	}
 	else if (Guess.length() != GetHiddenWordLength()) {
@@ -69,4 +71,33 @@ FBullCowCount Game::SubmitGuess(FString Guess)
 		bGameIsWon = false;
 	}
 	return BullCowCount;
+}
+
+bool Game::IsIsogram(FString Word) const
+{
+	if (Word.length() <= 1) { return true; }
+
+	TMap<char, bool> SeenLetter;
+
+	for (auto Letter : Word) {
+		Letter = tolower(Letter);
+		if (SeenLetter[Letter]) {
+			return false;
+		} else {
+			SeenLetter[Letter] = true;
+		}
+	}
+
+	return true;
+}
+
+bool Game::IsLowerCase(FString Word) const
+{
+	for (auto Letter : Word)
+	{
+		if (!islower(Letter)) {
+			return false;
+		}
+	}
+	return true;
 }
