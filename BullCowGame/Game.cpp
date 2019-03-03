@@ -1,5 +1,5 @@
+#pragma once
 #include "Game.h"
-#include "iostream"
 #include <map>
 #define TMap std::map
 
