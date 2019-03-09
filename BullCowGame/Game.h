@@ -23,6 +23,7 @@ public:
 	int32 GetMaxTries() const;
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
+	FString getIsogram(int32);
 
 	bool IsGameWon() const;
 	EWordStatus CheckGuessValidity(FString) const;
@@ -33,7 +34,6 @@ private:
 	int32 MyCurrentTry;
 	FString MyHiddenWord;
 	bool bGameIsWon;
-
 	bool IsIsogram(FString) const;
 	bool IsLowerCase(FString) const;
 };

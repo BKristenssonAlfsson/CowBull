@@ -1,6 +1,8 @@
 #pragma once
 #include "Game.h"
 #include <map>
+#include <fstream>
+#include <iostream>
 #define TMap std::map
 
 using int32 = int;
@@ -11,7 +13,23 @@ Game::Game()
 }
 
 int32 Game::GetMaxTries() const { 
-	TMap<int32, int32> WordLengthToMaxTries{ {3, 5}, {4, 8}, {5, 12}, {6, 18} };
+	TMap<int32, int32> WordLengthToMaxTries{ 
+		{3, 5}, 
+		{4, 8}, 
+		{5, 12}, 
+		{6, 18},
+		{7, 23},
+		{8, 28},
+		{9, 32},
+		{10, 36},
+		{11, 40},
+		{12, 44},
+		{13, 48},
+		{14, 52},
+		{15, 56},
+		{16, 60},
+		{17, 60}
+	};
 	return WordLengthToMaxTries[MyHiddenWord.length()];
 }
 
@@ -19,13 +37,23 @@ int32 Game::GetCurrentTry() const { return MyCurrentTry; }
 
 int32 Game::GetHiddenWordLength() const { return MyHiddenWord.length();  }
 
+FString Game::getIsogram(int32 Wordlength)
+{	
+	std::ifstream file("Isograms.txt");
+	std::string str;
+	while (std::getline(file, str)) {
+		std::cout << str << "\n";
+	}
+	const FString HIDDEN_WORD = "qwertyuiop";
+	MyHiddenWord = HIDDEN_WORD;
+	return MyHiddenWord;
+}
+
 bool Game::IsGameWon() const { return bGameIsWon; }
 
 void Game::Reset()
 {
-	const FString HIDDEN_WORD = "alpine";
-	MyHiddenWord = HIDDEN_WORD;
-
+	bGameIsWon = false;
 	MyCurrentTry = 1;
 }
 

@@ -14,7 +14,6 @@ bool AskToPlayAgain();
 Game BCGame;
 
 int main() {
-	
 	do {
 		Intro();
 		PlayGame();
@@ -24,7 +23,15 @@ int main() {
 }
 
 void Intro() {
+	FString choice;
+
 	std::cout << "\nWelcome to Bulls and Cows" << std::endl;
+	std::cout << "Please enter how long word you'd like to guess on. Between 3 and 17 letters in the word.";
+	std::getline(std::cin, choice);
+	
+	int32 convert = std::stoi(choice);
+	BCGame.getIsogram(convert);
+
 	std::cout << "Guess the isogram that has " << BCGame.GetHiddenWordLength() << " letters in it!" << std::endl;
 	std::cout << std::endl;
 	return;
