@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.h"
+#include <stdlib.h>
 #include <map>
 #include <fstream>
 #include <iostream>
@@ -16,6 +17,7 @@ Game::Game()
 
 int32 Game::GetMaxTries() const { 
 	TMap<int32, int32> WordLengthToMaxTries{ 
+		{2, 3},
 		{3, 5}, 
 		{4, 8}, 
 		{5, 12}, 
@@ -40,23 +42,22 @@ int32 Game::GetCurrentTry() const { return MyCurrentTry; }
 int32 Game::GetHiddenWordLength() const { return MyHiddenWord.length();  }
 
 FString Game::getIsogram(int32 Wordlength)
-{	
+{
 	std::ifstream file("Isograms.txt");
 	std::string str;
 	std::vector<FString> words;
-	
+
 	while (std::getline(file, str)) {
 		if (str.length() == Wordlength) {
 			words.push_back(str);
 		}
 	}
-/*  Reading content of vector
-	for (auto i = words.begin(); i != words.end(); ++i) {
-		std::cout << *i << "\n";
-	}
-	*/
-	const FString HIDDEN_WORD = "qwertyuiop";
+		
+	int32 randomWord = rand() % words.size();
+
+	const FString HIDDEN_WORD = words[randomWord];
 	MyHiddenWord = HIDDEN_WORD;
+	std::cout << MyHiddenWord << std::endl;
 	return MyHiddenWord;
 }
 

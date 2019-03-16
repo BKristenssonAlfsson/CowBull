@@ -104,6 +104,7 @@ bool AskToPlayAgain() {
 		return true;
 	}
 	else {
+		std::cout << "Hope you had fun. See you next time :)";
 		return false;
 	}
 }
