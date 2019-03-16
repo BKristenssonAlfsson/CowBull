@@ -57,7 +57,6 @@ FString Game::getIsogram(int32 Wordlength)
 
 	const FString HIDDEN_WORD = words[randomWord];
 	MyHiddenWord = HIDDEN_WORD;
-	std::cout << MyHiddenWord << std::endl;
 	return MyHiddenWord;
 }
 
