@@ -3,6 +3,8 @@
 #include <map>
 #include <fstream>
 #include <iostream>
+#include <vector>
+
 #define TMap std::map
 
 using int32 = int;
@@ -41,9 +43,18 @@ FString Game::getIsogram(int32 Wordlength)
 {	
 	std::ifstream file("Isograms.txt");
 	std::string str;
+	std::vector<FString> words;
+	
 	while (std::getline(file, str)) {
-		std::cout << str << "\n";
+		if (str.length() == Wordlength) {
+			words.push_back(str);
+		}
 	}
+/*  Reading content of vector
+	for (auto i = words.begin(); i != words.end(); ++i) {
+		std::cout << *i << "\n";
+	}
+	*/
 	const FString HIDDEN_WORD = "qwertyuiop";
 	MyHiddenWord = HIDDEN_WORD;
 	return MyHiddenWord;
