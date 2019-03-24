@@ -12,6 +12,8 @@ void PrintGameSummary();
 FText GetGuess();
 bool AskToPlayAgain();
 Game BCGame;
+int32 IsogramsGuessed = 0;
+int32 AmountOfGuesses = 0;
 
 int main() {
 	do {
@@ -88,6 +90,7 @@ FText GetGuess() {
 void PrintGameSummary() {
 	if (BCGame.IsGameWon()) {
 		std::cout << "You guessed right. You won. Great played!\n";
+		IsogramsGuessed++;
 	}
 	else {
 		std::cout << "You failed. Better luck next time!\n";
@@ -104,6 +107,7 @@ bool AskToPlayAgain() {
 		return true;
 	}
 	else {
+		std::cout << "You have guessed right on " << IsogramsGuessed << " isograms.\n";
 		std::cout << "Hope you had fun. See you next time :)";
 		return false;
 	}
