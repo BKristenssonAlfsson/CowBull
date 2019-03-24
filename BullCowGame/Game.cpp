@@ -73,6 +73,11 @@ int32 Game::AmountOfGuesses()
 	return Guesses;
 }
 
+int32 Game::IsogramsGuessed()
+{
+	return IsogramsCracked;
+}
+
 EWordStatus Game::CheckGuessValidity(FString Guess) const
 {
 	if (!IsIsogram(Guess)) {
@@ -111,6 +116,7 @@ FBullCowCount Game::SubmitGuess(FString Guess)
 	Guesses++;
 	if (BullCowCount.Bulls == WordLength) {
 		bGameIsWon = true;
+		IsogramsCracked++;
 	}
 	else {
 		bGameIsWon = false;
