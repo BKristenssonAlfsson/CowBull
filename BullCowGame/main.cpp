@@ -13,7 +13,6 @@ FText GetGuess();
 bool AskToPlayAgain();
 Game BCGame;
 int32 IsogramsGuessed = 0;
-int32 AmountOfGuesses = 0;
 
 int main() {
 	do {
@@ -108,6 +107,7 @@ bool AskToPlayAgain() {
 	}
 	else {
 		std::cout << "You have guessed right on " << IsogramsGuessed << " isograms.\n";
+		std::cout << "You have guessed " << BCGame.AmountOfGuesses() << " guesses in total.\n";
 		std::cout << "Hope you had fun. See you next time :)";
 		return false;
 	}

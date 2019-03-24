@@ -28,10 +28,12 @@ public:
 	bool IsGameWon() const;
 	EWordStatus CheckGuessValidity(FString) const;
 	void Reset();
+	int32 AmountOfGuesses();
 	FBullCowCount SubmitGuess(FString);
 
 private:
 	int32 MyCurrentTry;
+	int32 Guesses;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 	bool IsIsogram(FString) const;

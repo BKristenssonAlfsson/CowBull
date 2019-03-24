@@ -68,6 +68,11 @@ void Game::Reset()
 	MyCurrentTry = 1;
 }
 
+int32 Game::AmountOfGuesses() 
+{
+	return Guesses;
+}
+
 EWordStatus Game::CheckGuessValidity(FString Guess) const
 {
 	if (!IsIsogram(Guess)) {
@@ -101,8 +106,9 @@ FBullCowCount Game::SubmitGuess(FString Guess)
 					BullCowCount.Cows++;
 				}
 			}
-		}			
+		}
 	}
+	Guesses++;
 	if (BullCowCount.Bulls == WordLength) {
 		bGameIsWon = true;
 	}
