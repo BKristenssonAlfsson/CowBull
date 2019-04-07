@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 #define TMap std::map
 
@@ -44,15 +45,27 @@ int32 Game::GetHiddenWordLength() const { return MyHiddenWord.length();  }
 FString Game::getIsogram(int32 Wordlength)
 {
 	std::ifstream file("Isograms.txt");
-	std::string str;
+	std::string wordInFile;
 	std::vector<FString> words;
 
-	while (std::getline(file, str)) {
-		if (str.length() == Wordlength) {
-			words.push_back(str);
+	/*
+	while (std::getline(file, wordInFile)) {
+		if (wordInFile.length() == Wordlength) {
+			std::cout << "str: " << wordInFile << std::endl;
+			words.push_back(wordInFile);
 		}
 	}
-		
+	*/
+
+	for (std::string wordInFile; std::getline(file, wordInFile);)
+	{
+		if (wordInFile.length() == Wordlength)
+		{
+			std::cout << "str: " << wordInFile << std::endl;
+			words.push_back(wordInFile);
+		}
+	}
+
 	int32 randomWord = rand() % words.size();
 
 	const FString HIDDEN_WORD = words[randomWord];
@@ -73,9 +86,22 @@ int32 Game::AmountOfGuesses()
 	return Guesses;
 }
 
-int32 Game::IsogramsGuessed()
+int32 Game::IsogramsCracked()
 {
-	return IsogramsCracked;
+	return IsogramGuessedRight;
+}
+
+IsogramLengthChoice Game::CheckIsogramLength(int32 SelectedLength) const
+{
+	if (!IsToLowNumber(SelectedLength)) {
+		return IsogramLengthChoice::To_Low_Number;
+	}
+	else if (!IsToHighNumber(SelectedLength)) {
+		return IsogramLengthChoice::To_High_Number;
+	}
+	else {
+		return IsogramLengthChoice::OK;
+	}
 }
 
 EWordStatus Game::CheckGuessValidity(FString Guess) const
@@ -116,7 +142,7 @@ FBullCowCount Game::SubmitGuess(FString Guess)
 	Guesses++;
 	if (BullCowCount.Bulls == WordLength) {
 		bGameIsWon = true;
-		IsogramsCracked++;
+		IsogramGuessedRight++;
 	}
 	else {
 		bGameIsWon = false;
@@ -149,6 +175,22 @@ bool Game::IsLowerCase(FString Word) const
 		if (!islower(Letter)) {
 			return false;
 		}
+	}
+	return true;
+}
+
+bool Game::IsToLowNumber(int32 SelectedLength) const
+{
+	if (SelectedLength < 2) {
+		return false;
+	}
+	return true;
+}
+
+bool Game::IsToHighNumber(int32 SelectedLength) const
+{
+	if (SelectedLength > 17) {
+		return false;
 	}
 	return true;
 }

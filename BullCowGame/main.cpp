@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Game.h"
+#include <ctime>
 
 using FText = std::string;
 using int32 = int;
@@ -14,6 +15,7 @@ bool AskToPlayAgain();
 Game BCGame;
 
 int main() {
+	srand(time(nullptr));
 	do {
 		Intro();
 		PlayGame();
@@ -22,16 +24,39 @@ int main() {
 	return 0;
 }
 
+bool is_digits(const std::string &str)
+{
+	return str.find_first_not_of("0123456789") == std::string::npos;
+}
+
 void Intro() {
-	FString choice;
+	FString wantedLength;
+	int32 convert;
+	IsogramLengthChoice Choice = IsogramLengthChoice::Invalid;
 
 	std::cout << "\nWelcome to Bulls and Cows" << std::endl;
-	std::cout << "Please enter how long word you'd like to guess on. Between 3 and 17 letters in the word.";
-	std::getline(std::cin, choice);
-	
-	int32 convert = std::stoi(choice);
-	BCGame.getIsogram(convert);
 
+	do {
+		std::cout << "Please enter how long word you'd like to guess on. Between 2 and 17 letters in the word.";
+		std::getline(std::cin, wantedLength);
+		
+		convert = std::stoi(wantedLength);
+
+		Choice = BCGame.CheckIsogramLength(convert);
+
+		switch (Choice) {
+		case IsogramLengthChoice::To_Low_Number:
+			std::cout << "To low number\n\n";
+			break;
+		case IsogramLengthChoice::To_High_Number:
+			std::cout << "To High number\n\n";
+			break;
+		default:
+			break;
+		}
+	} while (Choice != IsogramLengthChoice::OK);
+
+	BCGame.getIsogram(convert);
 	std::cout << "Guess the isogram that has " << BCGame.GetHiddenWordLength() << " letters in it!" << std::endl;
 	std::cout << std::endl;
 	return;
@@ -104,7 +129,7 @@ bool AskToPlayAgain() {
 		return true;
 	}
 	else {
-		std::cout << "You have guessed right on " << BCGame.IsogramsGuessed() << " isograms.\n";
+		std::cout << "You have guessed right on " << BCGame.IsogramsCracked() << " isograms.\n";
 		std::cout << "You have guessed " << BCGame.AmountOfGuesses() << " guesses in total.\n";
 		std::cout << "Hope you had fun. See you next time :)";
 		return false;
