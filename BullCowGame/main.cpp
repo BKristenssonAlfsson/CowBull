@@ -24,13 +24,13 @@ int main() {
 	return 0;
 }
 
-bool is_digits(const std::string &str)
+bool is_digits(const std::string &WantedLength)
 {
-	return str.find_first_not_of("0123456789") == std::string::npos;
+	return WantedLength.find_first_not_of("0123456789") == std::string::npos;
 }
 
 void Intro() {
-	FString wantedLength;
+	FString WantedLength;
 	int32 convert;
 	IsogramLengthChoice Choice = IsogramLengthChoice::Invalid;
 
@@ -38,9 +38,16 @@ void Intro() {
 
 	do {
 		std::cout << "Please enter how long word you'd like to guess on. Between 2 and 17 letters in the word.";
-		std::getline(std::cin, wantedLength);
+		std::getline(std::cin, WantedLength);
 		
-		convert = std::stoi(wantedLength);
+		bool CheckIsNumber = is_digits(WantedLength);
+		
+		if (CheckIsNumber == true) {
+			convert = std::stoi(WantedLength);
+		}
+		else {
+			convert = -1;
+		}
 
 		Choice = BCGame.CheckIsogramLength(convert);
 
@@ -50,6 +57,9 @@ void Intro() {
 			break;
 		case IsogramLengthChoice::To_High_Number:
 			std::cout << "To High number\n\n";
+			break;
+		case IsogramLengthChoice::Not_Number:
+			std::cout << "You need to enter a number\n\n";
 			break;
 		default:
 			break;

@@ -93,7 +93,10 @@ int32 Game::IsogramsCracked()
 
 IsogramLengthChoice Game::CheckIsogramLength(int32 SelectedLength) const
 {
-	if (!IsToLowNumber(SelectedLength)) {
+	if (SelectedLength == -1) {
+		return IsogramLengthChoice::Not_Number;
+	}
+	else if (!IsToLowNumber(SelectedLength)) {
 		return IsogramLengthChoice::To_Low_Number;
 	}
 	else if (!IsToHighNumber(SelectedLength)) {

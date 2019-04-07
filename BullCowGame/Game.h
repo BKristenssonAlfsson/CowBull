@@ -12,6 +12,7 @@ struct FBullCowCount {
 enum class IsogramLengthChoice {
 	Invalid,
 	OK,
+	Not_Number,
 	To_High_Number,
 	To_Low_Number
 };
@@ -50,4 +51,5 @@ private:
 	bool IsLowerCase(FString) const;
 	bool IsToLowNumber(int32) const;
 	bool IsToHighNumber(int32) const;
+	bool NotANumber(int32) const;
 };
